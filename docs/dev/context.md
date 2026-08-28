@@ -5,7 +5,7 @@
 
 ## 現在の状態
 
-- 🔵 リポジトリはグリーンフィールド。既存の追跡対象プロダクトファイルは `napepro_service_design.md` のみ。
+- 🔵 リポジトリはグリーンフィールド。既存の追跡対象プロダクトファイルは `docs/dev/napepro_service_design.md` のみ。
 - 🔵 パッケージ定義、アプリケーションソース、テスト設定、CIワークフロー、マイグレーション、実行環境設定はまだ存在しない。
 - 🔵 承認済み実装計画は `docs/dev/plans/napepro-hub-mvp/` にあり、MVP Phase 1だけを対象とする。
 
@@ -189,7 +189,7 @@ shared → domainの共有契約のみ
 
 ## 情報源と制約
 
-- プロダクト要件の原典: `napepro_service_design.md`。
+- プロダクト要件の原典: `docs/dev/napepro_service_design.md`。
 - 承認済み範囲と判断: `docs/dev/plans/napepro-hub-mvp/plan.md`およびリンク先のFull-spec文書。
 - Nape Pro JSON構造は未確定。Task 002で信頼できる実機出力/既存OSSの根拠を得るまでparserを発明しない。
 - Embeddingモデル、Vectorize dimension、metric、metadata indexはTask 006で日本語fixtureのnDCG@10、Recall@10、p95、費用を比較して決定するまで未確定。🔴
