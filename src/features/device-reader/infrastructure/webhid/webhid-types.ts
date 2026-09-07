@@ -8,7 +8,7 @@ export type WebHidInputReportEvent = Event & {
   reportId: number;
 };
 
-export interface WebHidDevice extends EventTarget {
+export interface WebHidDevice {
   readonly opened: boolean;
   readonly vendorId: number;
   readonly productId: number;
