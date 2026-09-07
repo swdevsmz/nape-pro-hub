@@ -8,32 +8,40 @@ import {
 } from "./protocol";
 
 describe("read-only HID protocol guard", () => {
-  it.each([
-    [0xa1],
-    [0x04, 0, 0, 0],
-    [0x14, 0, 0, 0],
-    [0xa7, 0x20],
-    [0xa7, 0x21],
-    [0xa7, 0x24, 0],
-    [0xa7, 0x38, 0],
-  ])("allows GET packet %j", (packet) => {
-    expect(isAllowedReadPacket(packet)).toBe(true);
+  it("allows only the GET packets used by the PoC", () => {
+    const allowedPackets = [
+      [0xa1],
+      [0x04, 0, 0, 0],
+      [0x14, 0, 0, 0],
+      [0xa7, 0x20],
+      [0xa7, 0x21],
+      [0xa7, 0x24, 0],
+      [0xa7, 0x38, 0],
+    ];
+
+    for (const packet of allowedPackets) {
+      expect(isAllowedReadPacket(packet)).toBe(true);
+    }
   });
 
-  it.each([
-    [0x05, 0, 0, 0, 0, 0],
-    [0x13, 0, 0],
-    [0x15, 0, 0, 0, 0, 0],
-    [0xa7, 0x22, 0],
-    [0xa7, 0x23, 0, 0, 0],
-    [0xa7, 0x25, 0, 0, 0],
-    [0xa7, 0x27, 0],
-    [0xa7, 0x29, 0],
-    [0xa7, 0x2d, 0],
-    [0xa7, 0x34, 0],
-    [0xa7, 0x39, 0, 0],
-  ])("rejects write packet %j", (packet) => {
-    expect(isAllowedReadPacket(packet)).toBe(false);
+  it("rejects known write packets", () => {
+    const writePackets = [
+      [0x05, 0, 0, 0, 0, 0],
+      [0x13, 0, 0],
+      [0x15, 0, 0, 0, 0, 0],
+      [0xa7, 0x22, 0],
+      [0xa7, 0x23, 0, 0, 0],
+      [0xa7, 0x25, 0, 0, 0],
+      [0xa7, 0x27, 0],
+      [0xa7, 0x29, 0],
+      [0xa7, 0x2d, 0],
+      [0xa7, 0x34, 0],
+      [0xa7, 0x39, 0, 0],
+    ];
+
+    for (const packet of writePackets) {
+      expect(isAllowedReadPacket(packet)).toBe(false);
+    }
   });
 });
 
