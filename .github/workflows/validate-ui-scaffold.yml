@@ -1,0 +1,32 @@
+name: Validate PR UI scaffold
+
+on:
+  push:
+    branches:
+      - feat/mvp-ui-foundation
+    paths:
+      - package.json
+      - pnpm-lock.yaml
+      - src/**
+      - tsconfig.json
+      - next.config.ts
+      - .github/workflows/validate-ui-scaffold.yml
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.17.1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm build
