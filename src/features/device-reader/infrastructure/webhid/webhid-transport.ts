@@ -54,18 +54,10 @@ function responseMatches(
   }
 
   if (request[0] === 0xa7) {
-    if (response[1] !== request[1]) {
-      return false;
-    }
-
-    if (
-      (request[1] === 0x24 || request[1] === 0x38) &&
-      response[2] !== request[2]
-    ) {
-      return false;
-    }
-
-    return true;
+    // Nape固有GETは先頭2バイトだけをエコーする。
+    // byte[2]以降はDPI値やOrientation値として使われるため、
+    // リクエスト引数との一致条件にしてはいけない。
+    return response[1] === request[1];
   }
 
   if (request[0] === 0x04 || request[0] === 0x14) {
