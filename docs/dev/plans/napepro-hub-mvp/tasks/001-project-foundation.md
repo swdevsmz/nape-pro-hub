@@ -1,38 +1,59 @@
 ---
 id: "001"
-title: "プロジェクト基盤と契約を作成"
+title: "プロジェクト基盤を作成"
 status: pending
 priority: 1
 dependencies: []
 estimated_complexity: medium
 ---
 
-# Task: プロジェクト基盤と契約を作成
+# Task: プロジェクト基盤を作成
 
 ## Goal
 
-vinext/Next.js、TypeScript strict、pnpm、Wrangler、テスト、Lint、共通型を初期化し、後続タスクが同じ契約で実装できる状態にする。
+Next.js / vinext / TypeScript strict / pnpm / Wrangler / D1 / テスト基盤を初期化し、WebHID Readerと公開UIを実装できる最小構成を作る。
+
+## Scope
+
+- Next.js 16 App Router
+- vinext
+- Cloudflare Workers
+- TypeScript strict
+- pnpm lockfile
+- D1 + Drizzle
+- Vitest / React Testing Library / Playwright
+- API error contract
+
+MVPではBetter Auth、Queues、Workers AI、Vectorizeを追加しない。
 
 ## Interfaces
 
 ```typescript
-type ConfigStatus = "pending" | "published" | "hidden" | "deleted"; // 🟡
-type IndexStatus = "pending" | "ready" | "failed"; // 🟡
-interface ApiError { code: string; message: string; requestId: string; fieldErrors?: Record<string, string[]> } // 🟡
+type ConfigStatus = "published" | "hidden" | "deleted";
+
+interface ApiError {
+  code: string;
+  message: string;
+  requestId: string;
+  fieldErrors?: Record<string, string[]>;
+}
 ```
 
 ## Test Strategy
 
-- [ ] `pnpm typecheck`, `pnpm lint`, `pnpm test`, `pnpm build`が空の初期アプリで成功する。
-- [ ] APIエラーシリアライザがrequestIdとcodeを必ず含める。
-- [ ] Wrangler binding型生成がローカル設定と一致する。
-
-## Implementation Notes
-
-- 参照: `docs/dev/context.md`, `docs/dev/napepro_service_design.md:772-812`
-- vinext compatibility checkをCI前提にする。D1/Queue/AI/Vectorize binding名を一箇所で管理する。
+- [ ] `pnpm lint` が成功する
+- [ ] `pnpm typecheck` が成功する
+- [ ] `pnpm test` が成功する
+- [ ] `pnpm build` が成功する
+- [ ] Workers previewc񧈥llo pageを表示できる
 
 ## Files
 
-- 新規: `package.json`, `pnpm-lock.yaml`, `tsconfig.json`, `wrangler.jsonc`, `src/domain/contracts.ts`, `src/shared/errors.ts`, `vitest.config.ts`, `playwright.config.ts`
-- テスト: `src/shared/errors.test.ts`
+- `package.json`
+- `pnpm-lock.yaml`
+- `tsconfig.json`
+- `wrangler.jsonc`
+- `vitest.config.ts`
+- `playwright.config.ts`
+- `src/shared/errors.ts`
+- `src/infrastructure/db/*`
