@@ -90,5 +90,5 @@ export const demoConfigs: DemoConfig[] = [
 ];
 
 export function findDemoConfig(id: string) {
-  return demoConfigs.find((config) => config.id === id) ?? demoConfigs[0];
+  return demoConfigs.find((config) => config.id === id);
 }
