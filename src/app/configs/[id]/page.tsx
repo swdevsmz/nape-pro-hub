@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { NapeDevice } from "@/components/nape-device";
 import { SiteHeader } from "@/components/site-header";
@@ -13,6 +14,10 @@ export default async function ConfigDetailPage({
 }: ConfigDetailPageProps) {
   const { id } = await params;
   const config = findDemoConfig(id);
+
+  if (!config) {
+    notFound();
+  }
 
   return (
     <main className="page-shell">
