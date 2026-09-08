@@ -1,3 +1,5 @@
+export const RAW_NAPE_SNAPSHOT_SCHEMA_VERSION = "1" as const;
+
 export type FirmwareCompatibility = "verified" | "unverified";
 
 export type NapeDeviceInfo = {
@@ -33,6 +35,7 @@ export type OrientationSnapshot = {
 };
 
 export type RawNapeSnapshot = {
+  rawSchemaVersion: typeof RAW_NAPE_SNAPSHOT_SCHEMA_VERSION;
   device: NapeDeviceInfo;
   firmware: string;
   firmwareCompatibility: FirmwareCompatibility;
