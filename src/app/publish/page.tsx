@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { SiteHeader } from "@/components/site-header";
 
 export default function PublishPage() {
@@ -22,9 +24,9 @@ export default function PublishPage() {
           <section className="reader-card">
             <h2>Nape Proから設定を読み取る</h2>
             <p>Nape ProをPCに接続して、現在の設定を読み取ります。</p>
-            <button className="primary-button" type="button">
+            <Link className="primary-button primary-link-button" href="/device-reader-poc">
               Nape Proから設定を読み取る
-            </button>
+            </Link>
             <small>読み取り専用です。MVPでは設定を書き込みません。</small>
           </section>
 
