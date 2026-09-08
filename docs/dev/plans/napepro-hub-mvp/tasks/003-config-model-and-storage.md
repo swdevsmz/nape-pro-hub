@@ -1,7 +1,7 @@
 ---
 id: "003"
 title: "Hub canonical modelとD1保存を実装"
-status: pending
+status: in_progress
 priority: 1
 dependencies: ["002"]
 estimated_complexity: medium
@@ -60,9 +60,28 @@ interface NapeProHubConfig {
 - created_at
 - updated_at
 
+## Current Implementation
+
+- `src/features/config/domain/types.ts` にHub canonical modelを追加
+- `src/features/config/domain/normalize-raw-snapshot.ts` でRaw snapshotからHub modelへ正規化
+- keycodeを `rawCode / label / known` で保持し、未知値を `unknown` に残す
+- Raw snapshotとHub configに独立したschema versionを付与
+- `serializeHubConfig` / `deserializeHubConfig` で保存境界を追加
+- 投稿メタデータとdecoded key assignmentから `search_text` を生成
+- `migrations/0001-create-published-configs.sql` にD1初期schemaを追加
+- Repository interfaceを追加し、D1/Drizzle実装をdomainから分離
+
+### Remaining
+
+- Drizzle ORM schema / D1 adapterの実装
+- Cloudflare runtime bindingとの接続
+- local D1 migrationの実行確認
+
+Task 002の実機Go判定が未完了のため、実機依存項目は推測でcanonical modelへ追加しない。
+
 ## Test Strategy
 
-- [ ] fixtureからcanonical modelへ決定的に変換できる
-- [ ] unknown keycodeが消えない
-- [ ] serialize → deserializeで設定情報を失わない
+- [x] fixtureからcanonical modelへ決定的に変換できる
+- [x] unknown keycodeが消えない
+- [x] serialize → deserializeで設定情報を失わない
 - [ ] D1 migrationがlocalで成功する
