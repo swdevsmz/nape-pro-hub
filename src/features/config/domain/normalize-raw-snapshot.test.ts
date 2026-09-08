@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { RAW_NAPE_SNAPSHOT_SCHEMA_VERSION } from "@/features/device-reader/domain/types";
-import type { RawNapeSnapshot } from "@/features/device-reader/domain/types";
-
+import {
+  RAW_NAPE_SNAPSHOT_SCHEMA_VERSION,
+  type RawNapeSnapshot,
+} from "../../device-reader/domain/types";
 import { normalizeRawNapeSnapshot } from "./normalize-raw-snapshot";
 import { deserializeHubConfig, serializeHubConfig } from "./serialization";
 
