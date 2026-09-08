@@ -23,9 +23,30 @@ const KEYCODE_LABELS: Record<number, string> = {
   21035: "モード/レイヤ",
 };
 
+export type DecodedKeycode = {
+  code: number;
+  label: string;
+  known: boolean;
+};
+
+export function decodeKeycode(code: number): DecodedKeycode {
+  const label = KEYCODE_LABELS[code];
+
+  if (label !== undefined) {
+    return {
+      code,
+      label,
+      known: true,
+    };
+  }
+
+  return {
+    code,
+    label: `Unknown 0x${code.toString(16).toUpperCase().padStart(4, "0")}`,
+    known: false,
+  };
+}
+
 export function formatKeycode(code: number): string {
-  return (
-    KEYCODE_LABELS[code] ??
-    `Unknown 0x${code.toString(16).toUpperCase().padStart(4, "0")}`
-  );
+  return decodeKeycode(code).label;
 }
