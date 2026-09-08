@@ -1,5 +1,5 @@
-import { decodeKeycode } from "@/features/device-reader/domain/keycode-labels";
-import type { RawNapeSnapshot } from "@/features/device-reader/domain/types";
+import { decodeKeycode } from "../../device-reader/domain/keycode-labels";
+import type { RawNapeSnapshot } from "../../device-reader/domain/types";
 
 import {
   HUB_CONFIG_SCHEMA_VERSION,
