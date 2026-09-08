@@ -16,11 +16,12 @@ import {
   readU16Le,
   type ReadCommand,
 } from "./protocol";
-import type {
-  NapeDeviceInfo,
-  RawNapeSnapshot,
-  ReadConfigOptions,
-  ReadProgress,
+import {
+  RAW_NAPE_SNAPSHOT_SCHEMA_VERSION,
+  type NapeDeviceInfo,
+  type RawNapeSnapshot,
+  type ReadConfigOptions,
+  type ReadProgress,
 } from "./types";
 
 export interface HidTransport {
@@ -152,6 +153,7 @@ export class NapeDeviceReader {
     }
 
     return {
+      rawSchemaVersion: RAW_NAPE_SNAPSHOT_SCHEMA_VERSION,
       device: this.transport.deviceInfo,
       firmware,
       firmwareCompatibility,
